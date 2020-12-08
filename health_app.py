@@ -1,6 +1,4 @@
 from bmi import *
-from bmi2 import *
-from bmi3 import *
 import dash
 import dash_table
 import dash_core_components as dcc
@@ -10,8 +8,6 @@ import pandas as pd
 from dash.dependencies import Input, Output, State
 
 app = dash.Dash(external_stylesheets=[dbc.themes.MINTY])
-
-
 #Gather Loan Info from User
 inputs = dbc.Card(
     [
@@ -36,7 +32,7 @@ inputs = dbc.Card(
                 dbc.FormGroup(
                     [
                         dbc.Label("Height"),
-                        dbc.Input(id="height", placeholder='cm', type='number', min = 0, value = 150)
+                        dbc.Input(id="height", placeholder='cm', type='number', min = 0)
                     ],
                     className = 'mr-3',
                 ),
@@ -48,7 +44,7 @@ inputs = dbc.Card(
                 dbc.FormGroup(
                     [
                         dbc.Label("Weight"),
-                        dbc.Input(id="weight", placeholder='kg', type='number', min = 0, value = 54),
+                        dbc.Input(id="weight", placeholder='kg', type='number', min = 0),
                     ],
                     className = 'mr-3',
                 ),
@@ -60,7 +56,7 @@ inputs = dbc.Card(
                 dbc.FormGroup(
                     [
                         dbc.Label("Age"),
-                        dbc.Input(id = "age", placeholder = "years", type = 'number', min = 0, value = 22),
+                        dbc.Input(id = "age", placeholder = "years", type = 'number', min = 0),
                     ],
                     className = 'mr-3',
                 ),  
@@ -78,7 +74,6 @@ inputs = dbc.Card(
                 {'label':"Heavy Exercise", 'value': '4'},
                 {'label':"Very Heavy Exercise", 'value': '5'},
                 ],
-            value = '2',
             ), 
         dbc.Button(id='submit', n_clicks=0, children='Submit', color = "success",)
     ],
@@ -93,27 +88,44 @@ bmi_card = dbc.Card(
     ],
  body=True
 )
-
-#Results Section 
+#BMI and BMR Output Section
 results = dbc.Card(
     [
         html.H5(children = "Results:", style={'font-weight': 'bold'}),
-        dbc.FormGroup(
+        dbc.ListGroup(
             [
-                    dbc.Label("Your BMI:"),
-                    html.Div(id="output"),    
-                    dbc.Label("To maintain your weight you need:"),
-                    html.Div(id="output0"),
-                    dbc.Label("To lose 1 kg per week you need:"),
-                    html.Div(id="output1"),
-                    dbc.Label("To gain 1 kg per week you need:"),
-                    html.Div(id="output2")
+                dbc.ListGroupItem("Your BMI:", color = "info"),
+                dbc.ListGroupItem(id ='bmi-output')
             ],
-        )
+            horizontal=True,
+        ),
+        dbc.ListGroup(
+            [
+                dbc.ListGroupItem("To maintain your weight you need:", color = "success"),
+                dbc.ListGroupItem(id="maintain-output"),
+                dbc.ListGroupItem("Kcal/day")
+            ],
+            horizontal= True,
+        ),
+        dbc.ListGroup(
+            [
+                dbc.ListGroupItem("To lose 1 kg per week you need:", color = "secondary" ),
+                dbc.ListGroupItem(id="lose-output"),
+                dbc.ListGroupItem("Kcal/day")
+            ],
+            horizontal= True,
+        ),
+        dbc.ListGroup(
+            [
+                dbc.ListGroupItem("To gain 1 kg per week you need:", color = "danger"),
+                dbc.ListGroupItem(id="gain-output"),
+                dbc.ListGroupItem("Kcal/day")
+            ],
+            horizontal= True,
+        ),
     ],
     body=True
 )
-
 #Data for Exercise Table 
 df = pd.read_csv('exercise_data.csv')
 
@@ -155,7 +167,7 @@ exercise_card = dbc.Card(
 #Data for Energy Table 
 df = pd.read_csv('energy_data.csv')
 
-#Exercise Table
+#Energy Table
 energy_card = dbc.Card(
     [
         dbc.Col(html.H5(children = "Energy from Common Food Components:", 
@@ -219,29 +231,23 @@ app.layout = dbc.Container(
     fluid=True
 )
 
-#Backend 
+##Backend 
 @app.callback(
-    [Output("output", "children"), Output("output0", "children"), Output('output1', "children"), Output("output2", "children")],
+    [Output("bmi-output", "children"), Output("maintain-output", "children"), Output('lose-output', "children"), Output("gain-output", "children")],
     [Input('submit', 'n_clicks')],
     [State("height", "value"), State("weight", "value"), State("age", "value"),
-     State("sex", "value"), State("activity-dropdown", "value")]
+      State("sex", "value"), State("activity-dropdown", "value")]
 )
 
 def compute(nclicks, height, weight, age, sex, activity):
     if (height ==None or weight ==None or age ==None or sex==None or activity == None):
         return None, None, None, None 
-    #bmi = bmr = bmr_lose = bmr_gain = 0
-    print(nclicks)
-    print(height)
-    print(weight)
-    print(age)
-    print(sex)
-    print(activity)
-    #Use function from bmi.py to calculate values
-    x = mm(height, weight, age, sex, activity)
-    return x
+    ##Use function from bmi.py to calculate values 
+    else:
+        return calculator(float(height), float(weight), float(age), str(sex), int(activity))
 
-            
+
+
 
 if __name__ == '__main__':
     app.run_server(debug=True, use_reloader = False)
