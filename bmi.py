@@ -1,7 +1,7 @@
 #This uses the metric system
 def calculator(height, weight, age, sex, activity):
     #BMI, metric
-    bmi = round((weight/height/height) * 10000,2)
+    bmi = round((weight/height/height) * 10000,1)
     
     #Baseline BMRs, using the Revised Harris-Benedict Equation
     bmr_men = round(88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age))
@@ -70,7 +70,7 @@ def calculator(height, weight, age, sex, activity):
 #This uses the imperial system
 def calculator_imperial(height, weight, age, sex, activity):
     #BMI, imperial system
-    bmi = round(weight/(height*height) * 703,2)
+    bmi = round(weight/(height*height) * 703,1)
     
     #Conversions for BMR formula
     h = height/.39370

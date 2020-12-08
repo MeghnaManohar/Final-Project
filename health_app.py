@@ -45,7 +45,7 @@ inputs = dbc.Card(
                 dbc.FormGroup(
                     [
                         dbc.Label("Height: "),
-                        dbc.Input(id="height", placeholder='cms or inches', type='number', min = 0)
+                        dbc.Input(id="height", placeholder='cms or inches', type='float', min = 0)
                     ],
                     className = 'mr-3',
                 ),
@@ -57,7 +57,7 @@ inputs = dbc.Card(
                 dbc.FormGroup(
                     [
                         dbc.Label("Weight: "),
-                        dbc.Input(id="weight", placeholder='kgs or lbs', type='number', min = 0),
+                        dbc.Input(id="weight", placeholder='kgs or lbs', type='float', min = 0),
                     ],
                     className = 'mr-3',
                 ),
@@ -69,7 +69,7 @@ inputs = dbc.Card(
                 dbc.FormGroup(
                     [
                         dbc.Label("Age: "),
-                        dbc.Input(id = "age", placeholder = "years", type = 'number', min = 0),
+                        dbc.Input(id = "age", placeholder = "years", type = 'float', min = 0),
                     ],
                     className = 'mr-3',
                 ),  
