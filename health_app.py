@@ -8,12 +8,26 @@ import pandas as pd
 from dash.dependencies import Input, Output, State
 
 app = dash.Dash(external_stylesheets=[dbc.themes.MINTY])
-#Gather Loan Info from User
+
+#Gather Info from User
 inputs = dbc.Card(
     [
         html.H5(children = "Enter your Information:",
                 style={'font-weight': 'bold'}
                 ),
+        dbc.FormGroup(
+            [
+                dbc.RadioItems(
+                    options=[
+                        {'label': 'Metric System (cm & kg)', 'value': "metric"},
+                        {'label': 'Imperial System (in & lb)', 'value': "imperial"},
+                    ],
+                    id= "system", 
+                    inline = True,
+                    switch = True,
+                ),
+            ],
+        ),
         dbc.FormGroup(
             [
                 dbc.RadioItems(
@@ -30,8 +44,8 @@ inputs = dbc.Card(
             [
                 dbc.FormGroup(
                     [
-                        dbc.Label("Height"),
-                        dbc.Input(id="height", placeholder='cm', type='number', min = 0)
+                        dbc.Label("Height: "),
+                        dbc.Input(id="height", placeholder='cms or inches', type='number', min = 0)
                     ],
                     className = 'mr-3',
                 ),
@@ -42,8 +56,8 @@ inputs = dbc.Card(
             [
                 dbc.FormGroup(
                     [
-                        dbc.Label("Weight"),
-                        dbc.Input(id="weight", placeholder='kg', type='number', min = 0),
+                        dbc.Label("Weight: "),
+                        dbc.Input(id="weight", placeholder='kgs or lbs', type='number', min = 0),
                     ],
                     className = 'mr-3',
                 ),
@@ -54,7 +68,7 @@ inputs = dbc.Card(
             [
                 dbc.FormGroup(
                     [
-                        dbc.Label("Age"),
+                        dbc.Label("Age: "),
                         dbc.Input(id = "age", placeholder = "years", type = 'number', min = 0),
                     ],
                     className = 'mr-3',
@@ -108,7 +122,7 @@ results = dbc.Card(
         ),
         dbc.ListGroup(
             [
-                dbc.ListGroupItem("To lose 1 kg per week you need:", color = "secondary" ),
+                dbc.ListGroupItem("To lose 1 kg (2.2 lbs) per week you need:", color = "secondary" ),
                 dbc.ListGroupItem(id="lose-output"),
                 dbc.ListGroupItem("Kcal/day")
             ],
@@ -116,7 +130,7 @@ results = dbc.Card(
         ),
         dbc.ListGroup(
             [
-                dbc.ListGroupItem("To gain 1 kg per week you need:", color = "danger"),
+                dbc.ListGroupItem("To gain 1 kg (2.2 lbs) per week you need:", color = "danger"),
                 dbc.ListGroupItem(id="gain-output"),
                 dbc.ListGroupItem("Kcal/day")
             ],
@@ -127,7 +141,6 @@ results = dbc.Card(
 )
 #Data for Exercise Table 
 df = pd.read_csv('exercise_data.csv')
-
 #Exercise Table
 exercise_card = dbc.Card(
     [
@@ -165,7 +178,6 @@ exercise_card = dbc.Card(
 
 #Data for Energy Table 
 df = pd.read_csv('energy_data.csv')
-
 #Energy Table
 energy_card = dbc.Card(
     [
@@ -203,7 +215,7 @@ foodData_df = pd.read_csv('Food_Display_Table.csv')
 #Display Calorie Counter container
 counter = dbc.Card(
     [
-        html.H5(children="Calorie Counter and Food Calculator"),
+        html.H5(children="Calorie Counter and Food Calculator", style={'font-weight': 'bold'}),
 
         html.Br(),
 
@@ -267,22 +279,22 @@ app.layout = dbc.Container(
 )
 
 ##Backend 
+#Calc
 @app.callback(
     [Output("bmi-output", "children"), Output("maintain-output", "children"), Output('lose-output', "children"), Output("gain-output", "children")],
     [Input('submit', 'n_clicks')],
     [State("height", "value"), State("weight", "value"), State("age", "value"),
-      State("sex", "value"), State("activity-dropdown", "value")]
+      State("sex", "value"), State("activity-dropdown", "value"), State("system", "value")]
 )
 
-def compute(nclicks, height, weight, age, sex, activity):
+def compute(nclicks, height, weight, age, sex, activity, system):
     if (height ==None or weight ==None or age ==None or sex==None or activity == None):
         return None, None, None, None 
-    ##Use function from bmi.py to calculate values 
-    else:
+    #Use function from bmi.py to calculate values 
+    if system ==  "metric":
         return calculator(float(height), float(weight), float(age), str(sex), int(activity))
-
-
-
-
+    elif system == "imperial":
+        return calculator_imperial(float(height), float(weight), float(age), str(sex), int(activity))
+ 
 if __name__ == '__main__':
     app.run_server(debug=True, use_reloader = False)
