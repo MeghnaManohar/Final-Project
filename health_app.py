@@ -240,7 +240,12 @@ counter = dbc.Card(
 
         ),
 
-        dbc.Button("Submit", id='submitC', n_clicks=0, color="success", )
+        dbc.Button("Submit", id='submitC', n_clicks=0, color="success"),
+
+        html.Br(),
+
+        dbc.Button("Add New", id='submitN', n_clicks=0, color="primary")
+
     ],
     body=True
 )
@@ -304,12 +309,27 @@ app.layout = dbc.Container(
             [
                 dbc.Col(table)
             ]
-        )
+        ),
+
+        html.Br(),
     ],
     id="main-container",
     style={"display": "flex", "flex-direction": "column"},
     fluid=True
 )
+
+#Layout for hidden display
+# app.layout = dbc.Container(
+#     [
+#         dbc.Row(
+#             dbc.Col(
+#                 html.H2(children="Health App",
+#                         style={'font-weight': 'bold'})
+#             )
+#         ),
+#
+#     ]
+# )
 
 
 ##Backend
