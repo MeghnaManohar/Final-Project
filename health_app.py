@@ -22,7 +22,6 @@ inputs = dbc.Card(
                         {'label': 'Female', 'value': 'f'},
                     ],
                     id= "sex", 
-                    value = "f",
                     inline = True,
                 ),
             ],
