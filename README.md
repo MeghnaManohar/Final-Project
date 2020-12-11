@@ -18,7 +18,7 @@ Finally, users can create a menu for the day, by searching for through our food 
 Usage (for Developers):
 "health_app.py": contains the code for the app layout and to run on a Dash server. 
 "bmi.py": contains code to run bmi and bmr calculations.
-"energy_data.csv, exercise_date.csv, and Food_Display_Table.csv" are the databases used in our app
+"energy_data.csv, exercise_data.csv, and Food_Display_Table.csv" are the databases used in our app
 
 Notes:
 Users' BMR is calculated using the revised Harris-Benedict Equation.
