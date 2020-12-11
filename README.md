@@ -1,4 +1,4 @@
-# Final-Project: Health App
+# Final-Project: MP Health App
 Creators: Meghna Manohar & Precious Ufomadu
 
 
