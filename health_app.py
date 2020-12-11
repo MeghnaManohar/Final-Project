@@ -150,7 +150,7 @@ age = dbc.FormGroup(
     row=True,
 )
 
-# Build the weight
+# Build the weight input
 weight = dbc.FormGroup(
     [
         dbc.Label("Weight", html_for="weight", width=2),
@@ -305,15 +305,16 @@ tab1_content = dbc.Card(
     dbc.CardBody(
         [
             html.P(
-                "The MP Health App helps users live a healthier lifestyle! After obtanining information, "
-                "the app outputs the user's BMI, BMR, and suggested daily calories depending on whether they want to "
-                "maintain/lose/gain weight. Users can also search for common exercises and see how many calories that "
-                "activity usually burns. Finally, users can create a menu for the day, by searching for food and we'll "
-                "catalog how many calories each item of the menu has."
-                "Usage: Users input their sex, weight, height, age, and activity levels (in metric system or in the "
-                "imperial system). Our app will then output the user's Body Mass Index (BMI) and includes a visual of"
-                " the ranges of BMI (from underweight to obese). Users will also see their Basal Metabloic Rate (BMR) "
-                "which helps determine how many calories the user should have daily. Notes: Users' BMR is calculated "
+                "The MP Health App helps users live a healthier lifestyle! After obtaining information, "
+                "the app outputs the user's BMI, BMR, and suggests daily calories depending on whether they want to "
+                "maintain/lose/gain weight. Learn about common exercises and create your own daily menu!"
+                "How to Use: Just input your sex, weight, height, age, and activity levels (in metric system or in the "
+                "imperial system) and the MP Health App will calculate your Body Mass Index (BMI) which you can crosscheck"
+                " with the BMI Range Chart. We'll also calculate your Basal Metabloic Rate (BMR) "
+                "which helps determine how many calories you should have daily. We've also included"
+                "common exercises to help you figure out how to burn calories"
+                "Finally, in our last tab, you can search of food database and build a menu, noting"
+                "the calories associated with the food. Notes: Your BMR is calculated "
                 "using the revised Harris-Benedict Equation.",
 
                 className="card-text",
@@ -403,8 +404,12 @@ def compute(nclicks, height, weight, age, sex, activity, h_system, w_system):
     #Use function from bmi.py to calculate values
     return calculator(float(height), float(weight), float(age), str(sex), int(activity), str(h_system), str(w_system))
 
-
-
+#Test
+@pytest.mark.parametrize('height, weight, age, sex, activity, h_system, w_system',
+                         [
+                             (180, 60, 22,'m', 2, 'metric', 'metric'),
+                             (60.1, 118.9, 'f',22, 3, 'imperial', 'imperial'),
+                         ])
 
 if __name__ == '__main__':
     app.run_server(debug=True, use_reloader = False)
