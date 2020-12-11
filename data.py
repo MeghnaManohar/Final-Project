@@ -7,9 +7,8 @@ exercise_df = pd.read_csv('exercise_data.csv')
 energy_df = pd.read_csv('energy_data.csv')
 
 #Calorie counter dataset
-foodData_df = pd.read_csv('Food_Display_Table.csv')
-foodData_df = foodData_df.drop(columns=["Food_Code", "Portion_Default", "Factor", "Increment", "Multiplier"])
-foodData_df["Name Portion"] = foodData_df["Display_Name"] + " - " + foodData_df["Portion_Display_Name"]
+foodData_df = pd.read_csv('food_data.csv')
+foodData_df = foodData_df.drop(columns=["Display_Name", "Portion_Amount", "Portion_Display_Name"])
 
 #Image urls
 

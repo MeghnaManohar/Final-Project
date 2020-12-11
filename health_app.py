@@ -1,5 +1,5 @@
 # Import all the necessary packages needed
-# Citation: Layout code and comments were gotten from Dash website. Sinly google Dash dbc layout
+# Citation: Layout code and comments are from Dash website. Sinly google Dash dbc layout
 from bmi import *
 from data import *
 from test import *
@@ -215,7 +215,7 @@ tab3_calorie_content = dbc.Container (
                                     dcc.Dropdown(placeholder="e.g., apples, Sangria,...",
                                         value="search",
                                         id="counter",
-                                        options=[{"label": col, "value": col} for col in foodData_df['Name Portion'].unique()],
+                                        options=[{"label": col, "value": col} for col in foodData_df["Food"].unique()],
                                         multi=True
                                     ),
                                 dbc.FormText("Tip: do not include restaurant names "),
@@ -675,7 +675,7 @@ def update_dataTable(nclicksC, foods):
     if nclicksC:
         total_food_df = pd.DataFrame()
         for food in foods:
-            food_df = foodData_df[foodData_df["Name Portion"] == food]
+            food_df = foodData_df[foodData_df["Food"] == food]
             total_food_df = total_food_df.append(food_df)
 
         #Remove cols where everything is zero
@@ -711,7 +711,7 @@ def display_total_calories(nclicksC, foods):
     if nclicksC:
         total_food_df = pd.DataFrame()
         for food in foods:
-            food_df = foodData_df[foodData_df["Name Portion"] == food]
+            food_df = foodData_df[foodData_df["Food"] == food]
             total_food_df = total_food_df.append(food_df)
         sum = round(total_food_df['Calories'].sum(), 2)
 
