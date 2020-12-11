@@ -1,5 +1,7 @@
 # Import all the necessary packages needed
 from bmi import *
+from test import *
+import pytest
 import dash
 import dash_table
 import dash_core_components as dcc
@@ -56,10 +58,10 @@ sidebar = html.Div(
 #Build BMI Chart
 bmi_card = dbc.Card(
     [
-        dbc.CardImg(src = "https://files.prokerala.com/health/images/bmi-category.png"),
+        dbc.CardImg(src = "https://sfc-mma.com/wp-content/uploads/2019/11/bmi-featured.png"),
     ],
  body=True,
- style={"width": "40rem"},
+ style={"width": "92rem"},
 )
 
 
@@ -388,12 +390,6 @@ def render_page_content(pathname):
     )
 #######################################################################################################################
 ##Backend
-#Test
-@pytest.mark.parametrize('height, weight, age, sex, activity, h_system, w_system',
-                         [
-                             (180, 60, 22,'m', 2, 'metric', 'metric'),
-                             (60.1, 118.9, 'f',22, 3, 'imperial', 'imperial'),
-                         ])
 #Calculator
 @app.callback(
     [Output("bmi-output", "children"),
@@ -408,6 +404,12 @@ def render_page_content(pathname):
      State("height-dropdown", "value"),
      State("weight-dropdown", "value")]
 )
+#Test
+@pytest.mark.parametrize('height, weight, age, sex, activity, h_system, w_system',
+                          [
+                              (180, 60, 22,'m', 2, 'metric', 'metric'),
+                              (60.1, 118.9, 'f',22, 3, 'imperial', 'imperial'),
+                          ])
 
 def compute(nclicks, height, weight, age, sex, activity, h_system, w_system):
     if (height == None or weight ==None or age ==None or sex==None or activity == None):

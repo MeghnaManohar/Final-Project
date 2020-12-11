@@ -1,5 +1,6 @@
 import pytest
 from bmi import *
+from health_app import *
 
 @pytest.mark.parametrize('height, weight, age, sex, activity, h_system, w_system',
                          [
