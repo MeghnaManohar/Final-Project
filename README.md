@@ -5,7 +5,7 @@ Creators: Meghna Manohar & Precious Ufomadu
 Last Updated: December 10, 2020
 
 Description:
-Our Health App helps users live a healthier lifestyle! After obtaining information, the app outputs the user's BMI, BMR, and suggested daily calories depending on whether they want to maintain/lose/gain weight. Learn about common exercises and create your own daily menu!
+Our Health App helps users live a healthier lifestyle! After obtaining information, the app outputs the user's BMI, BMR, and suggests daily calories depending on whether they want to maintain/lose/gain weight. Learn about common exercises and create your own daily menu!
 
 
 Usage:
