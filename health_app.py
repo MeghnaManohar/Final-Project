@@ -383,6 +383,12 @@ def render_page_content(pathname):
     )
 #######################################################################################################################
 ##Backend
+#Test
+@pytest.mark.parametrize('height, weight, age, sex, activity, h_system, w_system',
+                         [
+                             (180, 60, 22,'m', 2, 'metric', 'metric'),
+                             (60.1, 118.9, 'f',22, 3, 'imperial', 'imperial'),
+                         ])
 #Calculator
 @app.callback(
     [Output("bmi-output", "children"),
@@ -404,12 +410,6 @@ def compute(nclicks, height, weight, age, sex, activity, h_system, w_system):
     #Use function from bmi.py to calculate values
     return calculator(float(height), float(weight), float(age), str(sex), int(activity), str(h_system), str(w_system))
 
-#Test
-@pytest.mark.parametrize('height, weight, age, sex, activity, h_system, w_system',
-                         [
-                             (180, 60, 22,'m', 2, 'metric', 'metric'),
-                             (60.1, 118.9, 'f',22, 3, 'imperial', 'imperial'),
-                         ])
 
 if __name__ == '__main__':
     app.run_server(debug=True, use_reloader = False)
