@@ -36,9 +36,6 @@ def bmr(height, weight, age, sex, activity, h_system, w_system):
     if w_system == "imperial":
         weight = weight / 2.2046
 
-    # BMI, metric
-    bmi = round((weight / height / height) * 10000, 1)
-
     # Baseline BMRs, using the Revised Harris-Benedict Equation
     bmr_men = round(88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age))
     bmr_women = round(447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age))
