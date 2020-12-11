@@ -1,7 +1,6 @@
 # Final-Project: MP Health App
 Creators: Meghna Manohar & Precious Ufomadu
 
-
 Last Updated: December 10, 2020
 
 Description:
@@ -18,7 +17,7 @@ Finally, users can create a menu for the day, by searching for through our food 
 
 Usage (for Developers):
 "health_app.py": contains the code for the app layout and to run on a Dash server. 
-"bmi.py": containt code to run bmi and bmr calculations
+"bmi.py": contains code to run bmi and bmr calculations
 energy_data.csv, exercise_date.csv, and Food_Display_Table.csv are the databases used in our app
 
 Notes:
