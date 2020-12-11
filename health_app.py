@@ -306,22 +306,27 @@ tab1_content = dbc.Card(
         [
             html.P(
                 "The MP Health App helps users live a healthier lifestyle! After obtaining information, "
-                "the app outputs the user's BMI, BMR, and suggests daily calories depending on whether they want to "
+                "Our app outputs the user's BMI, BMR, and suggests daily calories depending on whether you want to "
                 "maintain/lose/gain weight. Learn about common exercises and create your own daily menu!"
+                ),
+            html.P(
                 "How to Use: Just input your sex, weight, height, age, and activity levels (in metric system or in the "
-                "imperial system) and the MP Health App will calculate your Body Mass Index (BMI) which you can crosscheck"
-                " with the BMI Range Chart. We'll also calculate your Basal Metabloic Rate (BMR) "
-                "which helps determine how many calories you should have daily. We've also included"
-                "common exercises to help you figure out how to burn calories"
-                "Finally, in our last tab, you can search of food database and build a menu, noting"
-                "the calories associated with the food. Notes: Your BMR is calculated "
-                "using the revised Harris-Benedict Equation.",
-
+                "imperial system) and the MP Health App will calculate your Body Mass Index (BMI) which you can crosscheck "
+                "with the BMI Range Chart. We'll also calculate your Basal Metabloic Rate (BMR) "
+                "which helps determine how many calories you should have daily. We've also included "
+                "common exercises to help you figure out how to burn calories. "
+                "Finally, in our last tab, you can search of food database and build a menu, noting "
+                "the calories associated with the food. "
+                ),
+            html.P( 
+                "Notes: Your BMR is calculated using the revised Harris-Benedict Equation.",
+                
                 className="card-text",
             ),
         ]
     )
 )
+
 
 #Tab-1 Content
 tab1_overview_content = dbc.Container(
